@@ -5,7 +5,6 @@ import {
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
-  OAuthProvider,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -14,15 +13,8 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const appleSignIn = async () => {
-    const appleProvider = new OAuthProvider("apple.com");
-    console.log("here");
-    await signInWithPopup(auth, appleProvider);
-  };
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-
-    //signInWithRedirect(auth, provider);
     signInWithPopup(auth, provider);
   };
 
@@ -38,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user, appleSignIn }}>
+    <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
       {children}
     </AuthContext.Provider>
   );

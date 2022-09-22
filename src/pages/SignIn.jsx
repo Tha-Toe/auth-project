@@ -19,6 +19,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (user !== null) {
+      console.log("၀င်လာ");
       navigate("/account", { replace: true });
     }
   }, [user]);
